@@ -1,26 +1,28 @@
 /**
  * @package Quarkus-Messaging-Showcase
  *
- * @file Todo producer
- * @copyright 2020-2021 Christoph Kappel <christoph@unexist.dev>
+ * @file Todo cloudevent producer
+ * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
  * This program can be distributed under the terms of the GNU GPLv2.
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters;
+package dev.unexist.showcase.todo.adapters.cloudevents;
 
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.message.Encoding;
-import io.cloudevents.core.v1.CloudEventBuilder;
 import io.cloudevents.jackson.JsonFormat;
 import io.cloudevents.kafka.CloudEventSerializer;
+import io.cloudevents.v03.CloudEventBuilder;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.net.URI;
@@ -29,11 +31,13 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @ApplicationScoped
-public class TodoProducer {
+public class TodoCloudEventProducer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TodoCloudEventConsumer.class);
+
     private KafkaProducer<String, CloudEvent> producer;
     private CloudEventBuilder eventBuilder;
 
-    TodoProducer() {
+    TodoCloudEventProducer() {
         Properties props = new Properties();
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -45,7 +49,7 @@ public class TodoProducer {
 
         this.producer = new KafkaProducer<>(props);
 
-        this.eventBuilder = io.cloudevents.core.builder.CloudEventBuilder.v1()
+        this.eventBuilder = CloudEventBuilder.builder()
                 .withSource(URI.create("https://unexist.dev"))
                 .withType("todo");
     }
@@ -55,19 +59,20 @@ public class TodoProducer {
             String id = UUID.randomUUID().toString();
             String data = "Todo event";
 
-            CloudEvent event = this.eventBuilder.newBuilder()
+            CloudEvent event = this.eventBuilder
                     .withId(id)
-                    .withData("text/plain", data.getBytes())
+                    .withData(data)
                     .build();
 
             RecordMetadata metadata = this.producer
-                    .send(new ProducerRecord<>("todos", id, event))
+                    .send(new ProducerRecord<>("todos-ce", id, event))
                     .get();
 
-            System.out.println("Record sent to partition " + metadata.partition() +
-                    " with offset " + metadata.offset());
+            LOGGER.info("Record sent to partition {} with offset {}",
+                    metadata.partition(), metadata.offset());
         } catch (InterruptedException|ExecutionException e) {
-            System.out.println("Error while trying to send the record");
+            LOGGER.error("Error while trying to send the record");
+
             e.printStackTrace();
         }
 

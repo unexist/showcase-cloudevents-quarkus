@@ -1,15 +1,15 @@
 /**
  * @package Quarkus-Messaging-Showcase
  *
- * @file Todo consumer
- * @copyright 2020-2021 Christoph Kappel <christoph@unexist.dev>
+ * @file Todo cloudevent consumer
+ * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
  * This program can be distributed under the terms of the GNU GPLv2.
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters;
+package dev.unexist.showcase.todo.adapters.cloudevents;
 
 import io.cloudevents.CloudEvent;
 import io.cloudevents.kafka.CloudEventDeserializer;
@@ -17,24 +17,25 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.time.Duration;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 @ApplicationScoped
-public class TodoConsumer {
-    private KafkaConsumer<String, CloudEvent> consumer;
+public class TodoCloudEventConsumer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TodoCloudEventConsumer.class);
 
-    TodoConsumer() {
+    KafkaConsumer<String, CloudEvent> consumer;
+
+    TodoCloudEventConsumer() {
         Properties props = new Properties();
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "todo-cloudevents-consumer");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "todo-ce-consumer");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, CloudEventDeserializer.class);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
@@ -42,28 +43,18 @@ public class TodoConsumer {
 
         this.consumer = new KafkaConsumer<>(props);
 
-        consumer.subscribe(Collections.singletonList("todos"));
+        consumer.subscribe(Collections.singletonList("todos-ce"));
 
-        System.out.println("Consumer started");
+        LOGGER.info("Cloudevent consumer started");
     }
 
-    public List<Map<String, String>> receive() {
-        java.util.List<Map<String, String>> list = Collections.emptyList();
-
+    public void receive() {
         ConsumerRecords<String, CloudEvent> consumerRecords = consumer.poll(Duration.ofMillis(100));
         consumerRecords.forEach(record -> {
-            Map<String, String> recordEntry = new HashMap<>();
-
-            recordEntry.put("Record Key", record.key());
-            recordEntry.put("Record value", record.value().toString());
-            recordEntry.put("Record partition",
-                    String.valueOf(record.partition()));
-            recordEntry.put("Record offset",
-                    String.valueOf(record.offset()));
-
-            list.add(recordEntry);
+            LOGGER.info("Record key: {}", record.key());
+            LOGGER.info("Record value: {}", record.value().toString());
+            LOGGER.info("Record partition: {}", record.partition());
+            LOGGER.info("Record offset: {}", record.offset());
         });
-
-        return list;
     }
 }

@@ -14,6 +14,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <cloudevents.version>2.0.0.RC2</cloudevents.version>
+        <mutiny.version>0.13.0</mutiny.version>
+        <kafka-cdi-extension.version>0.1.0</kafka-cdi-extension.version>
 
         <apache-commons-lang.version>3.11</apache-commons-lang.version>
         <hg-revision-plugin.version>0.10</hg-revision-plugin.version>
@@ -25,6 +27,10 @@
         <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
         <quarkus.platform.version>1.11.1.Final</quarkus.platform.version>
+
+        <!-- Smallrye -->
+        <smallrye-reactive-messaging.version>3.0.0</smallrye-reactive-messaging.version>
+        <smallrye-reactive-messaging-cloud-events.version>2.8.0</smallrye-reactive-messaging-cloud-events.version>
 
         <!-- Audit -->
         <checkstyle-plugin.version>3.1.1</checkstyle-plugin.version>
@@ -62,6 +68,10 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-validator</artifactId>
         </dependency>
 
@@ -82,6 +92,30 @@
             <groupId>io.cloudevents</groupId>
             <artifactId>cloudevents-json-jackson</artifactId>
             <version>${cloudevents.version}</version>
+        </dependency>
+
+        <!-- Smallrye -->
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-cloud-events</artifactId>
+            <version>${smallrye-reactive-messaging-cloud-events.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-provider</artifactId>
+            <version>${smallrye-reactive-messaging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>mutiny-reactive-streams-operators</artifactId>
+            <version>${mutiny.version}</version>
+        </dependency>
+
+        <!-- Kafka CDI -->
+        <dependency>
+            <groupId>org.aerogear.kafka</groupId>
+            <artifactId>kafka-cdi-extension</artifactId>
+            <version>${kafka-cdi-extension.version}</version>
         </dependency>
 
         <!-- Apache Commons -->
