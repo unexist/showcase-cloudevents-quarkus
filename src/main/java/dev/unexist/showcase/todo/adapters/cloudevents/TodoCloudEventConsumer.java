@@ -5,7 +5,7 @@
  * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
- * This program can be distributed under the terms of the GNU GPLv2.
+ * This program can be distributed under the terms of the GNU GPLv3.
  * See the file LICENSE for details.
  **/
 
@@ -28,6 +28,7 @@ import java.util.Properties;
 @ApplicationScoped
 public class TodoCloudEventConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(TodoCloudEventConsumer.class);
+    private static final int POLL_IN_MILLIS = 100;
 
     KafkaConsumer<String, CloudEvent> consumer;
 
@@ -49,7 +50,8 @@ public class TodoCloudEventConsumer {
     }
 
     public void receive() {
-        ConsumerRecords<String, CloudEvent> consumerRecords = consumer.poll(Duration.ofMillis(100));
+        ConsumerRecords<String, CloudEvent> consumerRecords = consumer.poll(
+                Duration.ofMillis(POLL_IN_MILLIS));
         consumerRecords.forEach(record -> {
             LOGGER.info("Record key: {}", record.key());
             LOGGER.info("Record value: {}", record.value().toString());

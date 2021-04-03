@@ -5,7 +5,7 @@
  * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
- * This program can be distributed under the terms of the GNU GPLv2.
+ * This program can be distributed under the terms of the GNU GPLv3.
  * See the file LICENSE for details.
  **/
 
@@ -57,7 +57,7 @@ public class TodoBase {
     public void setDueDate(DueDate dueDate) {
         this.dueDate = dueDate;
 
-        if (null != dueDate.getStart() && null != dueDate.getDue()){
+        if (null != dueDate.getStart() && null != dueDate.getDue()) {
             this.done = dueDate.getStart().isBefore(dueDate.getDue());
         }
     }

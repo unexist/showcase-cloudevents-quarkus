@@ -5,7 +5,7 @@
  * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
- * This program can be distributed under the terms of the GNU GPLv2.
+ * This program can be distributed under the terms of the GNU GPLv3.
  * See the file LICENSE for details.
  **/
 
@@ -70,10 +70,8 @@ public class TodoCloudEventProducer {
 
             LOGGER.info("Record sent to partition {} with offset {}",
                     metadata.partition(), metadata.offset());
-        } catch (InterruptedException|ExecutionException e) {
-            LOGGER.error("Error while trying to send the record");
-
-            e.printStackTrace();
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.error("Error while trying to send the record", e);
         }
 
         this.producer.flush();
