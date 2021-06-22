@@ -1,0 +1,13 @@
+= Showcase for messaging based on quarkus
+
+This project holds a showcase for messaging with different technologies.
+
+== Frameworks
+
+- https://cloudevents.io[CloudEvents]
+
+== Technology
+
+- https://developers.redhat.com/blog/2018/05/31/introducing-the-kafka-cdi-library/
+- https://github.com/cloudevents/sdk-java/tree/master/examples/kafka/src/main/java/io/cloudevents/examples/kafka
+- https://quarkus.io/blog/kafka-cloud-events/
