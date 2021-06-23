@@ -9,13 +9,13 @@
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters;
+package dev.unexist.showcase.todo.adapter;
 
-import dev.unexist.showcase.todo.adapters.cdi.TodoCdiConsumer;
-import dev.unexist.showcase.todo.adapters.cloudevents.TodoCloudEventConsumer;
-import dev.unexist.showcase.todo.adapters.cloudevents.TodoCloudEventProducer;
-import dev.unexist.showcase.todo.adapters.smallrye.TodoSmallryeConsumer;
-import dev.unexist.showcase.todo.adapters.smallrye.TodoSmallryeProducer;
+import dev.unexist.showcase.todo.adapter.cdi.TodoCdiConsumer;
+import dev.unexist.showcase.todo.adapter.cloudevents.TodoCloudEventConsumer;
+import dev.unexist.showcase.todo.adapter.cloudevents.TodoCloudEventProducer;
+import dev.unexist.showcase.todo.adapter.smallrye.TodoSmallryeConsumer;
+import dev.unexist.showcase.todo.adapter.smallrye.TodoSmallryeProducer;
 import org.aerogear.kafka.SimpleKafkaProducer;
 import org.aerogear.kafka.cdi.annotation.Producer;
 import org.eclipse.microprofile.openapi.annotations.Operation;
