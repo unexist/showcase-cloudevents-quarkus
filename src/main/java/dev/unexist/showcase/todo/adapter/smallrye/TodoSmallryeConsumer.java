@@ -9,7 +9,7 @@
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters.smallrye;
+package dev.unexist.showcase.todo.adapter.smallrye;
 
 import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;

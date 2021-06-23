@@ -9,7 +9,7 @@
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters.cloudevents;
+package dev.unexist.showcase.todo.adapter.cloudevents;
 
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.message.Encoding;

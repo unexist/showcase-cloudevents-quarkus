@@ -9,7 +9,7 @@
  * See the file LICENSE for details.
  **/
 
-package dev.unexist.showcase.todo.adapters.cdi;
+package dev.unexist.showcase.todo.adapter.cdi;
 
 import org.aerogear.kafka.cdi.annotation.Consumer;
 import org.aerogear.kafka.cdi.annotation.KafkaConfig;
