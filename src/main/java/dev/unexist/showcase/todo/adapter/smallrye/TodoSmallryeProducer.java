@@ -2,7 +2,7 @@
  * @package Quarkus-Messaging-Showcase
  *
  * @file Todo producer
- * @copyright 2020 Christoph Kappel <christoph@unexist.dev>
+ * @copyright 2020-present Christoph Kappel <christoph@unexist.dev>
  * @version $Id$
  *
  * This program can be distributed under the terms of the Apache License v2.0.
