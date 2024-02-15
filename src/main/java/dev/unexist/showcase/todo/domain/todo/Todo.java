@@ -1,5 +1,5 @@
 /**
- * @package Quarkus-Messaging-Showcase
+ * @package Showcase-Cloudevents-Quarkus
  *
  * @file Todo class and aggregate root
  * @copyright 2020-present Christoph Kappel <christoph@unexist.dev>

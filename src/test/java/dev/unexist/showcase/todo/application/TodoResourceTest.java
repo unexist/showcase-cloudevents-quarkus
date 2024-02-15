@@ -1,5 +1,5 @@
 /**
- * @package Quarkus-Messaging-Showcase
+ * @package Showcase-Cloudevents-Quarkus
  *
  * @file Stupid integration test
  * @copyright 2019-present Christoph Kappel <christoph@unexist.dev>

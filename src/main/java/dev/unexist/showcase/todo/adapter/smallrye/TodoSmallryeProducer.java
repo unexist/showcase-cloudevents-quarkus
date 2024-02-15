@@ -1,5 +1,5 @@
 /**
- * @package Quarkus-Messaging-Showcase
+ * @package Showcase-Cloudevents-Quarkus
  *
  * @file Todo producer
  * @copyright 2020-present Christoph Kappel <christoph@unexist.dev>

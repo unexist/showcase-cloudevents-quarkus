@@ -1,6 +1,6 @@
-= Showcase for messaging based on quarkus
+= Showcase for CloudEvents based on Quarkus
 
-This project holds a showcase for messaging with different technologies.
+This project holds a showcase for CloudEvents with Kafka.
 
 == Frameworks
 

@@ -1,5 +1,5 @@
 /**
- * @package Quarkus-Messaging-Showcase
+ * @package Showcase-Cloudevents-Quarkus
  *
  * @file DueDate class
  * @copyright 2020-present Christoph Kappel <christoph@unexist.dev>
